@@ -1,5 +1,5 @@
 #Testing
-#0.03
+#0.04
 import pygame
 
 import time
@@ -20,6 +20,8 @@ FONT = pygame.font.Font(None,48)
 
 
 time_limit_ms = 5000
+time_reduction_ms = 500
+min_time_limit_ms = 1000
 current_challenge = None
 challenge_start_time = 0#
 FPS = 60
@@ -42,8 +44,11 @@ def start_new_challenge():
     heal_to_pass = 0
     phrases = [
     
-        ("CAST THE LINE","REEL",20),
-        ("REEL GENTLY","HEAL",10),
+        ("CAST THE LINE","Cast",20),
+        ("REEL GENTLY","Gentle Reel",10),
+        ("DRINK A PINT","Beverage",10),
+        ("QUICK SIT DOWN","Zzzzz",10),
+        ("REEL REEL REEL","Strong reel",10)
     ]
     phrase , action , value = random.choice(phrases)
     if action == "CAST THE LINE":
@@ -108,7 +113,10 @@ def main():
             
                     if current_challenge.expected_char_index == len(current_challenge.full_phrase):
                         print(f"Challenge Complete, Applying {current_challenge.action_type}")
+                        global time_limit_ms,time_reduction_ms,min_time_limit_ms
+                        time_limit_ms = max(min_time_limit_ms, time_limit_ms - time_reduction_ms)
                         start_new_challenge()
+                    
 
                 else:
                     print("Incorrect Character")
@@ -119,6 +127,7 @@ def main():
         elapsed_time = pygame.time.get_ticks() - challenge_start_time
         if elapsed_time > time_limit_ms:
             print("Time up!")
+            time_limit_ms = 10000
             start_new_challenge()
 
         draw(elapsed_time)
