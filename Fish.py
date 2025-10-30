@@ -101,16 +101,19 @@ def main():
 
                     if current_challenge.expected_char_index < len(current_challenge.full_phrase):
                         expected_char = current_challenge.full_phrase[current_challenge.expected_char_index]
+
                     if pressed_char == expected_char:
                         current_challenge.typed_phrase += pressed_char
                         current_challenge.expected_char_index += 1
             
-        if current_challenge.expected_char_index == len(current_challenge.full_phrase):
-                    print(f"Challenge Complete, Applying {current_challenge.action_type}")
-        else:
-            print("Incorrect Character")
-            current_challenge.typed_phrase = ""
-            current_challenge.expected_char_index = 0
+                    if current_challenge.expected_char_index == len(current_challenge.full_phrase):
+                        print(f"Challenge Complete, Applying {current_challenge.action_type}")
+
+                else:
+                    print("Incorrect Character")
+                    current_challenge.typed_phrase = ""
+                    current_challenge.expected_char_index = 0
+                    
 
         elapsed_time = pygame.time.get_ticks() - challenge_start_time
         if elapsed_time > time_limit_ms:
