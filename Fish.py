@@ -1,5 +1,5 @@
 #Testing
-#0.01
+#0.03
 import pygame
 
 import time
@@ -108,6 +108,7 @@ def main():
             
                     if current_challenge.expected_char_index == len(current_challenge.full_phrase):
                         print(f"Challenge Complete, Applying {current_challenge.action_type}")
+                        start_new_challenge()
 
                 else:
                     print("Incorrect Character")
