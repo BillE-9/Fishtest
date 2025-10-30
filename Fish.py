@@ -1,5 +1,5 @@
 #Testing
-#0.04
+#0.05
 import pygame
 
 import time
@@ -48,7 +48,7 @@ def start_new_challenge():
         ("REEL GENTLY","Gentle Reel",10),
         ("DRINK A PINT","Beverage",10),
         ("QUICK SIT DOWN","Zzzzz",10),
-        ("REEL REEL REEL","Strong reel",10)
+        ("REEL! REEL! REEL!","Strong reel",10)
     ]
     phrase , action , value = random.choice(phrases)
     if action == "CAST THE LINE":
@@ -101,7 +101,7 @@ def main():
                 run = False
                 break   
             if event.type == pygame.KEYDOWN:
-                if event.unicode.isalnum() or event.key == pygame.K_SPACE:
+                if event.unicode.isalnum() or event.key == pygame.K_SPACE or event.key == pygame.K_EXCLAIM or event.key ==pygame.K_LSHIFT or event.key ==pygame.K_1:
                     pressed_char = event.unicode.upper()
 
                     if current_challenge.expected_char_index < len(current_challenge.full_phrase):
